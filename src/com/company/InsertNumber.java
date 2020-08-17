@@ -5,27 +5,37 @@ import java.util.List;
 import java.util.Scanner;
 
 import static com.company.Interpretations.*;
+import static com.company.Validations.allValidations;
 
 
 public class InsertNumber {
 
-    private String phoneNumbers;
+    //private String phoneNumbers;
 
-    private ArrayList<Integer> phone;
+    //private ArrayList<Integer> phone;
 
     public static String insertPhone() {
         Scanner sc = new Scanner(System.in);  // Create a Scanner object
-        System.out.println("Enter the phone Number: ");
 
-        String phone = sc.nextLine();  // Read user input
 
+        String phone;
+        String phoneNumbersWithoutSpaces;
+        ArrayList<String> phoneNumbersInList;
+        do {
+            System.out.println("Enter the phone Number: ");
+            phone = sc.nextLine();  // Read user input
+            phoneNumbersInList = sequenseWithoutSpaces(phone);
+            phoneNumbersWithoutSpaces= phone.replaceAll("\\s+","");
+        }while (!allValidations(phoneNumbersWithoutSpaces,phoneNumbersInList));
         return phone;
     }
 
 
         public static void internationalOrDomestic(String phone){
 
-        if (phone.substring(0,1).equals("0")) {
+
+
+        if (phone.substring(0,1).equals("0") || phone.substring(0,2).equals("00")|| phone.substring(0,3).equals("003")) {
 
             int indexOfThirdZero=3;
             int index=2;
@@ -61,6 +71,17 @@ public class InsertNumber {
         for (String digit:arrayOfNumberDigitGroups
              ) {
             phone.add(Integer.parseInt(digit));
+        }
+        return phone;
+    }
+
+    public static ArrayList<String> sequenseWithoutSpaces(String phoneNumbers){
+        ArrayList<String> phone=new ArrayList<String>();
+        String[] arrayOfNumberDigitGroups = phoneNumbers.split("\\s+");
+
+        for (String digit:arrayOfNumberDigitGroups
+        ) {
+            phone.add(digit);
         }
         return phone;
     }

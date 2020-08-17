@@ -7,7 +7,7 @@ import java.util.Set;
 public class Interpretations {
     public static void interpretations(List<Integer> phone,boolean IternationalsCalls){
             Node root = new Node(phone.get(0));
-        if (phone.get(0)==2) {
+        if (phone.get(0)==2 || (phone.get(0)>=20 && phone.get(0)<=29)) {
             //root = new Node(phone.get(0));
             root.addSingleChild(new Node(phone.get(1)));
             allInterpretations(phone,root,2);
@@ -17,7 +17,7 @@ public class Interpretations {
             allInterpretations(phone,root,1);
             printTree(root,false,IternationalsCalls);
         }
-        if (phone.get(0)==69 || phone.get(0)==6){
+        if ((phone.get(0)==69 || phone.get(0)==6) && phone.get(1)!=9){
              //root = new Node(phone.get(0));
             allInterpretations(phone,root,1);
             printTree(root,false,IternationalsCalls);
