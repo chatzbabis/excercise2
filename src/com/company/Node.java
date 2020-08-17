@@ -149,7 +149,7 @@ public class Node {
 //        node.getChildren().forEach(each ->  printTree(each));
 //    }
 
-    public static void printAllRootToLeafPaths(Node node,List<Integer> path)
+    public static void printAllRootToLeafPaths(Node node,List<Integer> path,Boolean withoutRoot,Boolean forInternational)
     {
         if(node==null)
         {
@@ -161,7 +161,21 @@ public class Node {
 
         if(node.getChildren().isEmpty())
         {
-            System.out.println(path);
+            if (forInternational) {
+                System.out.print("0030");
+            }
+            if (withoutRoot){
+                for(int i=1; i<=path.size()-1; i++){
+                    System.out.print(path.get(i));
+                }
+                System.out.println();
+            }else {
+                for (Integer digit : path
+                ) {
+                    System.out.print(digit);
+                }
+                System.out.println();
+            }
 
             return;
         }
@@ -169,7 +183,8 @@ public class Node {
         {
             for (Node parent:node.getChildren()
                  ) {
-                printAllRootToLeafPaths(parent,new ArrayList(path));
+
+                printAllRootToLeafPaths(parent,new ArrayList(path),withoutRoot,forInternational);
             }
 
 
